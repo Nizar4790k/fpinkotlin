@@ -8,13 +8,82 @@ import utils.SOLUTION_HERE
 //TODO: Enable tests by removing `!` prefix
 class Exercise1 : WordSpec({
     //tag::init[]
-    fun fib(i: Int): Int =
+    fun fib(i: Int): Int {
 
-        SOLUTION_HERE()
+        tailrec fun go(
+            numeroAnterior: Int,
+            numeroActual: Int,
+            iterator: Int
+        ): Int {
+
+            val acc = numeroAnterior + numeroActual
+
+
+            if(iterator<=0) return acc
+            return go(
+                numeroAnterior = numeroActual,
+                numeroActual = acc,
+                iterator = iterator - 1
+            )
+
+        }
+        return if(i==1) 1
+        else go(
+            numeroAnterior = 0,
+            numeroActual = 1,
+            iterator = i-2
+        )
+
+
+
+        /*
+        if(i==1){
+            return 1
+        }else{
+            var acumulador = 0
+            var numeroAnterior = 0
+            var numeroActual = 1
+            var j = 1
+
+            while (j<i){
+                acumulador = numeroAnterior + numeroActual
+                numeroAnterior = numeroActual
+                numeroActual = acumulador
+                j++
+            }
+
+            return numeroActual
+       */
+
+        /*
+        fun go(n:Int,acc:Int):Int{
+            if(n<=0) acc
+            else go(n-1,n*acc)
+            return go(i,1)
+        }
+
+        when(i){
+            0->0
+            1->1
+            else->go(i,0)
+
+        }
+
+         */
+
+
+    }
+
+
+
+
+
+
+
     //end::init[]
 
     "fib" should {
-        "!return the nth fibonacci number" {
+        "return the nth fibonacci number" {
             persistentMapOf(
                 1 to 1,
                 2 to 1,
