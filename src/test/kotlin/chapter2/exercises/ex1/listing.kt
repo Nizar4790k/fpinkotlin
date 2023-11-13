@@ -11,29 +11,45 @@ class Exercise1 : WordSpec({
     fun fib(i: Int): Int {
 
         tailrec fun go(
-            numeroAnterior: Int,
-            numeroActual: Int,
+            previousNumber: Int,
+            currentNumber: Int,
             iterator: Int
         ): Int {
 
-            val acc = numeroAnterior + numeroActual
+            val acc = previousNumber + currentNumber
 
+            return when( iterator <= 0){
+                true-> acc
+                else-> go(
+                    previousNumber = currentNumber,
+                    currentNumber = acc,
+                    iterator = iterator - 1
+                )
+            }
 
-            if(iterator<=0) return acc
-            return go(
-                numeroAnterior = numeroActual,
-                numeroActual = acc,
-                iterator = iterator - 1
+                /*
+           if(iterator<=0) return acc
+             return go(
+              numeroAnterior = numeroActual,
+              numeroActual = acc,
+              iterator = iterator - 1
             )
 
-        }
-        return if(i==1) 1
-        else go(
-            numeroAnterior = 0,
-            numeroActual = 1,
-            iterator = i-2
-        )
+          */
+            }
 
+
+
+        return when(i){
+
+            0->0
+            1->1
+            else->go(
+                previousNumber = 0,
+                currentNumber = 1,
+                iterator = i-2
+            )
+        }
 
 
         /*
