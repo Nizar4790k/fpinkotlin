@@ -7,13 +7,26 @@ import utils.SOLUTION_HERE
 //TODO: Enable tests by removing `!` prefix
 class Exercise3 : WordSpec({
     // tag::init[]
-    fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C =
+    fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C = { a : A -> { b :B -> f(a,b) }}
 
-        SOLUTION_HERE()
+
+
+        /*
+        {
+        return fun(A):(B)->(C){
+            return fun(B):C{
+                return f(A,B)
+            }
+        }
+        }
+         */
+
+
+
     // end::init[]
 
     "curry" should {
-        """!break down a function that takes multiple arguments into
+        """break down a function that takes multiple arguments into
             a series of functions that each take only oneargument""" {
 
             val f: (Int) -> (Int) -> String =

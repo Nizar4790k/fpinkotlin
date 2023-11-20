@@ -7,13 +7,13 @@ import utils.SOLUTION_HERE
 //TODO: Enable tests by removing `!` prefix
 class Exercise4 : WordSpec({
     // tag::init[]
-    fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C =
+    fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C ={a :A ,b :B->f(a)(b) }
 
-        SOLUTION_HERE()
+        //SOLUTION_HERE()
     // end::init[]
 
     "uncurry" should {
-        """!take a function accepting two values and then apply that
+        """take a function accepting two values and then apply that
             function to the components of the pair which is the
             second argument""" {
 

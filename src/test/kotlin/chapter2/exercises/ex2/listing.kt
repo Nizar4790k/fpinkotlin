@@ -1,12 +1,8 @@
 package chapter2.exercises.ex2
 
-import chapter3.exercises.ex1.tail
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import kotlinx.collections.immutable.persistentListOf
-import utils.SOLUTION_HERE
-import java.lang.StringBuilder
-import java.util.Arrays
 
 // tag::init[]
 val <T> List<T>.tail: List<T>
@@ -17,53 +13,30 @@ val <T> List<T>.head: T
 
 fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean {
 
+    tailrec fun go(aa: List<A>, order: (A, A) -> Boolean,isAscending:Boolean):Boolean{
+        return when(aa.isEmpty()){
+            true->true
+            else->{
+                val  values = ArrayList<Boolean>()
+                values.addAll(aa.tail.map { order(aa.head,it) } )
 
-
-    if(aa.isEmpty()){
-        return true
-    }else{
-
-
-        val max = aa.maxBy {it.toString()}
-        val min = aa.maxBy {it.toString()}
-
-        val ascMode =  order(min as A,max as A)
-
-
-        val  values = ArrayList<Boolean>()
-
-        aa.forEach{i->
-
-            values.addAll( aa.map { j->
-                order(i,j)
-            })
-
-
+               return when(isAscending){
+                    true-> go(aa.tail,order,isAscending)
+                    false->return values.filter { true }.isEmpty()
+                }
+            }
         }
-
-        if(ascMode){
-
-
-            return values.filter { false }.isEmpty()
-
-
-        }else{
-            return values.filter { true }.isEmpty()
-        }
-
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    return when (aa.isEmpty()){
+        true->true
+        else->{
+            val max = aa.maxBy {it.toString()}
+            val min = aa.maxBy {it.toString()}
+            val ascMode =  order(min as A,max as A)
+            return go(aa,order,ascMode)
+        }
+    }
 }
 
 

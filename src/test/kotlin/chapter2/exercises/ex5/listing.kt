@@ -7,9 +7,9 @@ import utils.SOLUTION_HERE
 //TODO: Enable tests by removing `!` prefix
 class Exercise5 : WordSpec({
     // tag::init[]
-    fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C =
+    fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C ={ A->f(g(A)) }
 
-        SOLUTION_HERE()
+        //SOLUTION_HERE()
     // end::init[]
 
     "compose" should {
