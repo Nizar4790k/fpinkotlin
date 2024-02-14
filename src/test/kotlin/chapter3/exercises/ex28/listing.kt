@@ -3,31 +3,46 @@ package chapter3.exercises.ex28
 import chapter3.Branch
 import chapter3.Leaf
 import chapter3.Tree
+import chapter3.solutions.sol27.map
+import chapter5.sec1.x
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE
 
 // tag::init[]
-fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B =
+fun <A, B> fold(ta: Tree<A>, l: (A) -> B, b: (B, B) -> B): B {
 
-    SOLUTION_HERE()
+    return when (ta) {
+        is Leaf -> l(ta.value)
+        is Branch->{
+            val left = fold(ta.left,l=l, b = b)
+            val rigth = fold(ta.right,l=l, b = b)
+            b(left,rigth)
+        }
+    }
 
-fun <A> sizeF(ta: Tree<A>): Int =
+}
 
-    SOLUTION_HERE()
 
-fun maximumF(ta: Tree<Int>): Int =
 
-    SOLUTION_HERE()
+fun <A> sizeF(ta: Tree<A>): Int {
 
-fun <A> depthF(ta: Tree<A>): Int =
+    return fold(ta,l ={1}, b = {x, y -> x+y+1})
+}
 
-    SOLUTION_HERE()
+fun maximumF(ta: Tree<Int>): Int {
+    return fold(ta,{a->a},{x,y->maxOf(x,y) })
 
-fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> =
+}
 
-    SOLUTION_HERE()
-// end::init[]
+fun <A> depthF(ta: Tree<A>): Int{
+    return fold(ta,{0},{x,y->1+ maxOf(x,y) })
+}
+
+fun <A, B> mapF(ta: Tree<A>, f: (A) -> B): Tree<B> {
+    return fold(ta,{a:A->Leaf(f(a))},{b1:Tree<B>,b2:Tree<B>->Branch(b1,b2)})
+}
+
 
 //TODO: Enable tests by removing `!` prefix
 class Exercise28 : WordSpec({
@@ -46,19 +61,19 @@ class Exercise28 : WordSpec({
                 )
             )
         )
-        "!generalise size" {
+        "generalise size" {
             sizeF(tree) shouldBe 15
         }
 
-        "!generalise maximum" {
+        "generalise maximum" {
             maximumF(tree) shouldBe 21
         }
 
-        "!generalise depth" {
+        "generalise depth" {
             depthF(tree) shouldBe 5
         }
 
-        "!generalise map" {
+        "generalise map" {
             mapF(tree) { it * 10 } shouldBe
                 Branch(
                     Branch(Leaf(10), Leaf(20)),

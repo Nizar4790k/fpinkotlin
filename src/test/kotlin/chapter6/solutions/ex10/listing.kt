@@ -28,11 +28,10 @@ data class State<S, out A>(val run: (S) -> Pair<A, S>) {
             }
 
         fun <S, A> sequence(fs: List<State<S, A>>): State<S, List<A>> =
-            foldRight(fs, unit(List.empty<A>()),
-                { f, acc ->
-                    map2(f, acc) { h, t -> Cons(h, t) }
-                }
-            )
+            foldRight(fs, unit(List.empty<A>())
+            ) { f, acc ->
+                map2(f, acc) { h, t -> Cons(h, t) }
+            }
         //end::ignore[]
     }
 

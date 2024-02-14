@@ -1,6 +1,6 @@
 package chapter3
 
-sealed class List<out A> {
+sealed class  List<out A> {
     companion object {
         fun <A> of(vararg aa: A): List<A> {
             val tail = aa.sliceArray(1 until aa.size)
@@ -18,6 +18,8 @@ sealed class List<out A> {
 
     fun reverse(): List<A> =
         foldLeft(this, empty(), { t: List<A>, h: A -> Cons(h, t) })
+
+
 }
 
 object Nil : List<Nothing>() {

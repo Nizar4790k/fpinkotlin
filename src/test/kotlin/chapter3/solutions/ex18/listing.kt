@@ -10,11 +10,11 @@ import io.kotlintest.specs.WordSpec
 fun <A> filter(xs: List<A>, f: (A) -> Boolean): List<A> =
     foldRight(
         xs,
-        List.empty(),
-        { a, ls ->
-            if (f(a)) Cons(a, ls)
-            else ls
-        })
+        List.empty()
+    ) { a, ls ->
+        if (f(a)) Cons(a, ls)
+        else ls
+    }
 // end::init[]
 
 class Solution18 : WordSpec({

@@ -19,10 +19,10 @@ fun <A> concat(xxs: List<List<A>>): List<A> =
 fun <A> concat2(xxs: List<List<A>>): List<A> =
     foldRight(
         xxs,
-        List.empty(),
-        { xs1, xs2 ->
-            append(xs1, xs2)
-        })
+        List.empty()
+    ) { xs1, xs2 ->
+        append(xs1, xs2)
+    }
 // end::init[]
 
 class Solution14 : WordSpec({

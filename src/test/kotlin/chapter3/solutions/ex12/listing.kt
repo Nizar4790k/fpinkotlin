@@ -10,12 +10,12 @@ import io.kotlintest.specs.WordSpec
 fun <A, B> foldLeftR(xs: List<A>, z: B, f: (B, A) -> B): B =
     foldRight(
         xs,
-        { b: B -> b },
-        { a, g ->
-            { b ->
-                g(f(b, a))
-            }
-        })(z)
+        { b: B -> b }
+    ) { a, g ->
+        { b ->
+            g(f(b, a))
+        }
+    }(z)
 
 fun <A, B> foldRightL(xs: List<A>, z: B, f: (A, B) -> B): B =
     foldLeft(xs,

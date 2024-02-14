@@ -10,10 +10,10 @@ import io.kotlintest.specs.WordSpec
 fun doubleToString(xs: List<Double>): List<String> =
     foldRight(
         xs,
-        List.empty(),
-        { d, ds ->
-            Cons(d.toString(), ds)
-        })
+        List.empty()
+    ) { d, ds ->
+        Cons(d.toString(), ds)
+    }
 // end::init[]
 
 class Solution16 : WordSpec({

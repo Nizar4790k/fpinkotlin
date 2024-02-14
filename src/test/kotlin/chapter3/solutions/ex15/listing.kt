@@ -10,10 +10,10 @@ import io.kotlintest.specs.WordSpec
 fun increment(xs: List<Int>): List<Int> =
     foldRight(
         xs,
-        List.empty(),
-        { i: Int, ls ->
-            Cons(i + 1, ls)
-        })
+        List.empty()
+    ) { i: Int, ls ->
+        Cons(i + 1, ls)
+    }
 // end::init[]
 
 class Solution15 : WordSpec({

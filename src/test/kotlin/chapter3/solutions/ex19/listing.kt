@@ -11,18 +11,18 @@ import io.kotlintest.specs.WordSpec
 fun <A, B> flatMap(xa: List<A>, f: (A) -> List<B>): List<B> =
     foldRight(
         xa,
-        List.empty(),
-        { a, lb ->
-            append(f(a), lb)
-        })
+        List.empty()
+    ) { a, lb ->
+        append(f(a), lb)
+    }
 
 fun <A, B> flatMap2(xa: List<A>, f: (A) -> List<B>): List<B> =
     foldRight(
         xa,
-        List.empty(),
-        { a, xb ->
-            foldRight(f(a), xb, { b, lb -> Cons(b, lb) })
-        })
+        List.empty()
+    ) { a, xb ->
+        foldRight(f(a), xb, { b, lb -> Cons(b, lb) })
+    }
 // end::init[]
 
 class Solution19 : WordSpec({

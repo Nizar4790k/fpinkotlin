@@ -27,9 +27,9 @@ fun <A> sequence(fs: List<Rand<A>>): Rand<List<A>> = { rng ->
 
 //a better approach using foldRight
 fun <A> sequence2(fs: List<Rand<A>>): Rand<List<A>> =
-    foldRight(fs, unit(List.empty()), { f, acc ->
+    foldRight(fs, unit(List.empty())) { f, acc ->
         map2(f, acc, { h, t -> Cons(h, t) })
-    })
+    }
 
 fun ints2(count: Int, rng: RNG): Pair<List<Int>, RNG> {
     fun go(c: Int): List<Rand<Int>> =
