@@ -1,17 +1,25 @@
 package chapter4.exercises.ex4
 
+import chapter3.Cons
 import chapter3.List
 import chapter4.None
 import chapter4.Option
 import chapter4.Some
+import chapter4.map
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
 import utils.SOLUTION_HERE
 
 //tag::init[]
-fun <A> sequence(xs: List<Option<A>>): Option<List<A>> =
+ fun <A> sequence(xs: List<Option<A>>): Option<List<A>> {
 
-    SOLUTION_HERE()
+   return xs.map {
+        when(it){
+            is Some->{Some(Cons( head = it.get,))}
+        }
+    }
+
+}
 //end::init[]
 
 //TODO: Enable tests by removing `!` prefix
